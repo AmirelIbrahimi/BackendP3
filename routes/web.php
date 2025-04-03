@@ -9,4 +9,5 @@ Route::get('/', function () {
 Route::get('/ping', [PingController::class, 'index']);
 Route::get('/posts', [PingController::class, 'posts']);
 Route::get('/posts/show', [PingController::class, 'show']);
+//github aanmaken
 
