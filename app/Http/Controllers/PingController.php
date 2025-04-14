@@ -22,4 +22,24 @@ class PingController extends Controller
     public function show(Post $post){
         return view('show', compact('post'));
     }
+    public function create()
+    {
+        return view('posts.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        $post = new Post();
+        $post->title = $validated['title'];
+        $post->content = $validated['content'];
+        $post->user_id = auth()->id(); // Huidige ingelogde gebruiker
+        $post->save();
+
+        return redirect('/posts')->with('success', 'Bericht succesvol aangemaakt!');
+    }
 }
