@@ -15,8 +15,12 @@ Route::post('/register', [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'login']);
 
-// Post Routes
-Route::post('/create-post', [PostController::class, 'createPost']);
-Route::get('/edit-post/{post}', [PostController::class, 'showEditScreen']);
-Route::put('/edit-post/{post}', [PostController::class, 'actuallyUpdatePost']);
-Route::delete('/delete-post/{post}', [PostController::class, 'deletePost']);
+Route::get('/contact', function () {
+    return view('contact');
+});
+
+// Post Routes (alleen voor ingelogde gebruikers)
+Route::post('/create-post', [PostController::class, 'createPost'])->middleware('auth');
+Route::get('/edit-post/{post}', [PostController::class, 'showEditScreen'])->middleware('auth');
+Route::put('/edit-post/{post}', [PostController::class, 'actuallyUpdatePost'])->middleware('auth');
+Route::delete('/delete-post/{post}', [PostController::class, 'deletePost'])->middleware('auth');

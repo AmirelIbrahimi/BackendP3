@@ -12,6 +12,26 @@
     </script>
 </head>
 <body class="dark bg-gray-900 text-gray-100 font-sans min-h-screen">
+<nav class="bg-gray-800 border-b border-amber-600 shadow-md">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-8">
+            <a href="/" class="text-amber-400 text-xl font-bold hover:underline">My Restaurant</a>
+            <a href="/contact" class="text-gray-300 hover:text-amber-400">Contact</a>
+        </div>
+
+        <div>
+            @auth
+                <form action="/logout" method="POST" class="inline">
+                    @csrf
+                    <button class="text-red-400 hover:underline">Logout</button>
+                </form>
+            @else
+                <a href="#login" class="text-green-400 hover:underline mr-4">Login</a>
+                <a href="#register" class="text-blue-400 hover:underline">Register</a>
+            @endauth
+        </div>
+    </div>
+</nav>
 
 <div class="max-w-3xl mx-auto py-10 px-6">
     <h1 class="text-4xl font-bold text-center text-amber-400 mb-8">Welcome to My Restaurant</h1>
@@ -63,7 +83,7 @@
 
     @else
         <!-- Registration -->
-        <div class="bg-gray-800 border border-amber-600 rounded-lg shadow-md p-6 mb-6">
+        <div id="register" class="bg-gray-800 border border-amber-600 rounded-lg shadow-md p-6 mb-6">
             <h2 class="text-2xl font-semibold text-amber-300 mb-4">Register</h2>
             <form action="/register" method="POST" class="space-y-4">
                 @csrf
@@ -80,7 +100,7 @@
         </div>
 
         <!-- Login -->
-        <div class="bg-gray-800 border border-amber-600 rounded-lg shadow-md p-6">
+        <div id="login" class="bg-gray-800 border border-amber-600 rounded-lg shadow-md p-6">
             <h2 class="text-2xl font-semibold text-amber-300 mb-4">Login</h2>
             <form action="/login" method="POST" class="space-y-4">
                 @csrf
